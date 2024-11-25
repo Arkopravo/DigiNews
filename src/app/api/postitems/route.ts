@@ -9,6 +9,7 @@ export async function GET() {
     return Response.json(postItems);
 }
 
+
 export async function POST(request: Request) {
     const postItem = await request.json();
 
@@ -28,3 +29,6 @@ export async function POST(request: Request) {
         {status: 500})
     }
 } 
+
+
+
