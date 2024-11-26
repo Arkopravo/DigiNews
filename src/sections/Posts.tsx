@@ -21,7 +21,7 @@ export interface PostProps {
   };
 }
 
-const initialPost = {
+export const initialPost = {
   _id: '',
   img: '',
   category: '',
