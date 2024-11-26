@@ -1,26 +1,18 @@
 import React from 'react';
 import "./postItemOne.css";
 import Link from 'next/link';
+import { PostProps } from '@/sections/Posts';
 
 const PostItemOne = ({large, item} : {
     large: boolean;
-    item:{
-        _id: string;
-        img: string;
-        category: string;
-        date: string;
-        title: string;
-        brief: string;
-        avatar: string;
-        author: string;
-    }
+    item:PostProps['item'];
 }) => {
   return (
     <div className={`post-entry-1 ${large ? 'lg' : undefined}`}>
         <Link href={`postitems/${item._id}`}>
             <img src={`/${item.img}`} alt='' className='img-fluid' />
         </Link>
-        <div className="post-meta">
+        <div className="post-meta"> 
             <span className='date'>{item.category}</span>
             <span className='mx-1'>
                 <i className='bi bi-dot'></i>{' '}

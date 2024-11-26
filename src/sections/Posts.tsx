@@ -8,10 +8,36 @@ import TrendingPost from "@/components/TrendingPost";
 import Preloader from "@/components/Preloader";
 
 
+export interface PostProps {
+  item: {
+    _id: string;
+    img: string;
+    category: string;
+    date: string;
+    title: string;
+    brief: string;
+    avatar: string;
+    author: string;
+  };
+}
+
+const initialPost = {
+  _id: '',
+  img: '',
+  category: '',
+  date: '',
+  title: '',
+  brief: '',
+  avatar: '',
+  author: '',
+}
+
+
 export default function Posts() {
   const router = useRouter();
-  const [items, setItems] = useState<any | []>([]);
-  const[item, setItem] = useState({});
+  const [items, setItems] = useState([]);
+  const[item, setItem] = useState(initialPost);
+
 
   const getItemsData = () => {
     fetch(`/api/postitems`)
@@ -58,18 +84,7 @@ export default function Posts() {
                     !item.trending && !item.top
                   ).slice(0, 3)
                   .map(
-                    (item: {
-                      item: {
-                        _id: string;
-                        img: string;
-                        category: string;
-                        date: string;
-                        title: string;
-                        brief: string;
-                        avatar: string;
-                        author: string;
-                      };
-                    }) => (
+                    (item: PostProps) => (
                       <PostItemOne key={item._id} large={false} item={item} />
                     )
                   )) : (
@@ -85,18 +100,7 @@ export default function Posts() {
                       !item.trending && !item.top
                     ).slice(3, 6)
                     .map(
-                      (item: {
-                        item: {
-                          _id: string;
-                          img: string;
-                          category: string;
-                          date: string;
-                          title: string;
-                          brief: string;
-                          avatar: string;
-                          author: string;
-                        };
-                      }) => (
+                      (item: PostProps) => (
                         <PostItemOne key={item._id} large={false} item={item} />
                       )
                     )
@@ -113,18 +117,7 @@ export default function Posts() {
                     {
                       items && items.length>0 ? (
                         items.filter((item: {trending: boolean}) => item.trending)
-                        .map((item: {
-                          item: {
-                            _id: string;
-                            img: string;
-                            category: string;
-                            date: string;
-                            title: string;
-                            brief: string;
-                            avatar: string;
-                            author: string;
-                          };
-                        }, index: number) => (
+                        .map((item: PostProps, index: number) => (
                           <TrendingPost key={item._id} item={item} index={index} />
                         ))
                         ) : (
