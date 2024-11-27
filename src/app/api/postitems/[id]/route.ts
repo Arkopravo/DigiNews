@@ -19,3 +19,38 @@ export async function GET(
         );
     }
 }
+
+
+
+// edit/put route
+export async function PUT (
+    request: Request,
+    {params}: {params: {id: string}}
+) {
+    const updatedItem = await request.json();
+    try{
+        const postItem = await PostItem.findByIdAndUpdate(params.id, 
+            {
+                ...updatedItem,
+            });
+            
+            if(!postItem) {
+                return new Response(JSON.stringify({message: "No item found for this ID"}),
+                {status: 404,}
+            )}
+
+            return new Response(JSON.stringify(postItem), {
+                headers: {
+                    "Content-Type": 'application/json',
+                },
+                status: 200,
+            });
+    } catch(error) {
+        return new Response(JSON.stringify({message: "Server Error"}),
+            {status: 500,})
+    }
+}
+
+
+
+// delete route
