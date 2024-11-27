@@ -8,6 +8,8 @@ import Preloader from '@/components/Preloader';
 import { tabsData } from '@/data/data';
 import SidePostItem from '@/components/SidePostItem';
 import { PostProps } from '@/sections/Posts';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 // for single item
 const PostItem = ({params}: {params: {id: string}}) => {
@@ -15,6 +17,8 @@ const PostItem = ({params}: {params: {id: string}}) => {
     const id: string = params.id;
     const [item, setItem] = useState(initialPost);
     const [items, setItems] = useState([]);
+
+    const router = useRouter();
 
 
     const [tabs, setTabs] = useState(tabsData);
@@ -47,6 +51,25 @@ const PostItem = ({params}: {params: {id: string}}) => {
         getSinglePostData();
         getItemsData();
     }, []);
+
+    const handleDeletePost = async(id: string) => {
+        try{
+            const response = await fetch(`/api/postitems/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            const result = response.status;
+            if(result === 200) {
+                console.log("Success: ", result);
+                router.push(`/postitems`)
+            }
+
+        } catch(error) {
+            console.log("Error: ", error);
+        }
+    }
 
   return (
     <main id='main'>
@@ -96,6 +119,15 @@ const PostItem = ({params}: {params: {id: string}}) => {
 
                             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias ratione culpa, distinctio, incidunt eaque inventore perferendis doloremque, sequi hic maxime fugit beatae ullam! Sed quia mollitia fugiat accusantium doloremque totam facere, nostrum exercitationem, corporis iste inventore quos rem tenetur placeat reiciendis itaque, natus est libero? Fuga excepturi modi nulla quae.
                             </p>
+
+                            <div className="d-flex justify-content-center gap-4">
+                                <a className='btn btn-primary' onClick={() => handleDeletePost(id)}>
+                                    <i className='bi bi-trash'></i>
+                                </a>
+                                <Link href={`/createpostitem/${id}`} className='btn btn-primary'>
+                                    <i className='bi bi-pen'></i>
+                                </Link>
+                            </div>
                         </div>
                         ) : (
                             <Preloader/>
