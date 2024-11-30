@@ -12,6 +12,9 @@ const Header = () => {
 
     const [open, setOpen] = useState(false);
     const [on, setOn] = useState(false);
+
+    const [readingMode, setReadingMode] = useState(false);
+
     const handleFormOpen = () => {
         setOpen((prev) => !prev);
     };
@@ -21,6 +24,16 @@ const Header = () => {
         const body: HTMLElement | any = document.querySelector('body')
         body.classList.toggle('mobile-nav-active')
     }
+
+
+    const toggleReadingMode = () => {
+        setReadingMode(!readingMode);
+        const body = document.querySelector('body');
+        body?.classList.toggle('reading-mode', !readingMode);
+    };
+
+
+
 
   return (
     <header id="header" className='header d-flex align-items-center fixed-top'>
@@ -45,6 +58,11 @@ const Header = () => {
                     )
                 }
                 <SearchForm active={open} formOpen={handleFormOpen} />
+
+                <button className="reading-mode-toggle mx-2" onClick={toggleReadingMode}>
+                    {readingMode ? 'Normal Mode' : 'Reading Mode'}
+                </button>
+
             </div>
         </div>
 

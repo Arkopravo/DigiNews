@@ -23,3 +23,32 @@
     color: var(--color-default);
     font-family: var(--font-primary);
   }
+
+
+
+
+
+  body.reading-mode {
+    background-color: #fff8dc; /* Light yellowish tone */
+    color: #333;
+  }
+  
+  /* Reading mode header styles */
+  body.reading-mode .header {
+    background-color: #f9f3d6; /* Slightly darker yellowish tone for header */
+    color: #333;
+  }
+  
+  /* Reading mode toggle button */
+  .reading-mode-toggle {
+    padding: 5px;
+    background-color: #f4e5a4; /* Light yellow button */
+    color: #333;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .reading-mode-toggle:hover {
+    background-color: #eedc82; /* Darker yellow on hover */
+  }

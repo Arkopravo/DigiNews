@@ -4,9 +4,11 @@ import Link from 'next/link'
 import "./nav.css"
 
 const Nav = () => {
+
   return (
     <nav id='navbar' className='navbar'>
         <ul>
+
             {navs.map((nav) =>(
                 <li key={nav.id}>
                     <Link href={nav.link}>
@@ -15,10 +17,11 @@ const Nav = () => {
                         }
                     </Link>
                 </li>
+                
             ) )}
         </ul>
     </nav>
   )
 }
 
-export default Nav
+export default Nav;
